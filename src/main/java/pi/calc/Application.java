@@ -24,6 +24,7 @@ public class Application {
     }
 
     public void CalcPI(BigDecimal P, BigInteger countRec) {
+        long start = System.currentTimeMillis();
         this.recursiveLevel = this.recursiveLevel.add(BigInteger.ONE); //We are running this function
         
         BigDecimal Rx = this._r.pow(2, this._round)
@@ -36,7 +37,10 @@ public class Application {
 
         BigDecimal pi = b.multiply(new BigDecimal(countRec), this._round)
                 .divide(_r, this._round); //b * countRec / _r
-        System.err.println("¦ Recursive level count: " + recursiveLevel.toString() + " Lines: " + countRec + " Pi: " + pi.toString());
+        
+        long elapsedTimeMillis = System.currentTimeMillis()-start;
+        float elapsedTimeSec = elapsedTimeMillis/1000F;
+        System.err.println("¦ Calc Time: " + elapsedTimeSec + "s Recursive level count: " + recursiveLevel.toString() + " Lines: " + countRec + " Pi: " + pi.toString());
 
         countRec = countRec.multiply(BigInteger.TWO);
         try {
